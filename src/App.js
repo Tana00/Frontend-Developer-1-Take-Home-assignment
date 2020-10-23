@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 
-// function App() {
 class App extends React.Component {
   constructor() {
     super();
@@ -13,7 +12,6 @@ class App extends React.Component {
   }
 
   async getSearchResults(e) {
-    // const req = await fetch("http://localhost:3000/Books.json");
     const req = await fetch(
       `https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.searchBox}`
     );
@@ -26,25 +24,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <div className="form">
-          <input
-            type="number"
-            value={this.state.searchBox}
-            id="search-box"
-            placeholder="Enter an ISBN to search for a book. An example is '0747532699'"
-            onChange={(e) => {
-              this.setState({ searchBox: e.target.value });
-            }}
-          />
-          <button onClick={this.getSearchResults}>Search</button>
-        </div> */}
-
         <form class="search-container form">
           <input
             type="text"
             value={this.state.searchBox}
             id="search-bar"
-            placeholder="0747532699"
+            placeholder="ISBN for Harry Porter 0747532699"
             onChange={(e) => {
               this.setState({ searchBox: e.target.value });
             }}
