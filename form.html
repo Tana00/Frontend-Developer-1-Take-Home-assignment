@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+      <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+          <a href="./index.html">Return back</a>
+          <h2>Invoice</h2>
+        </div>
+
+        <!-- FORM -->
+        <div id="form" class="form">
+          <div class="grid-wrapper">
+            <label for="invoice-no"
+              >Invoice number
+              <input
+                type="text"
+                name=""
+                id="invoice-no"
+                placeholder="e.g 20170630-4072-00"
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+              />
+            </label>
+            <label for="amt"
+              >Amount
+              <input type="number" name="" id="amt" placeholder="Amount" />
+            </label>
+          </div>
+
+          <div class="grid-dates">
+            <label for="invoice-date"
+              >Invoice date
+              <input
+                type="date"
+                name=""
+                id="invoice-date"
+                placeholder="Invoice Date"
+              />
+            </label>
+            <label for="delivery-date"
+              >Delivery date
+              <input
+                type="date"
+                name=""
+                id="delivery-date"
+                placeholder="Delivery Date"
+              />
+            </label>
+            <label for="settle-date"
+              >Settle date
+              <input
+                type="date"
+                name=""
+                id="settle-date"
+                placeholder="Settle Date"
+              />
+            </label>
+          </div>
+          <div class="grid-container">
+            <label class="select" for="vat"
+              >Vat
+              <select name="" id="vat" placeholder="Vat">
+                <option value="0">No vat</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="15">15%</option>
+                <option value="20">20%</option>
+              </select>
+              <span class="focus"></span>
+            </label>
+            <label class="select" for="cur"
+              >Currency
+              <select name="" id="cur" aria-placeholder="Currency">
+                <option
+                  data-icon="https://cdn4.iconfinder.com/data/icons/flat-circle-flag/182/circle_flag_us_america_united_states-128.png"
+                  class="right circle"
+                  value="usd"
+                  selected
+                >
+                  $ USD
+                </option>
+                <option value="eur">€ EUR</option>
+                <option value="gbp">£ GBP</option>
+                <option value="jpy">¥ JPY</option>
+                <option value="cad">$ CAD</option>
+                <option value="aud">$ AUD</option>
+              </select>
+            </label>
+            <label class="select" for="exch-rate"
+              >Exchange rate
+              <select name="" id="exch-rate" aria-placeholder="Exchange Rate">
+                <option value="1">Option1</option>
+                <option value="2">Option2</option>
+                <option value="3">Option3</option>
+                <option value="4">Option4</option>
+                <option value="5">Option5</option>
+              </select>
+            </label>
+            <label class="select" for="client"
+              >Client
+              <select name="" id="client" aria-placeholder="Client">
+                <option value="1">Client 1</option>
+                <option value="2">Client 2</option>
+                <option value="3">Client 3</option>
+                <option value="4">Client 4</option>
+                <option value="5">Client 5</option>
+              </select>
+            </label>
+          </div>
+          <div class="grid-wrapper">
+            <label for="order-no"
+              >Order number
+              <input
+                type="text"
+                name=""
+                id="order-no"
+                placeholder="Order Number"
+              />
+            </label>
+            <label for="agents"
+              >Sales agents
+              <input
+                type="text"
+                name=""
+                id="agents"
+                placeholder="Sales Agent"
+              />
+            </label>
+          </div>
+          <label for="desc"
+            >Description
+            <textarea
+              name=""
+              id="textarea"
+              rows="6"
+              placeholder="Description..."
+            ></textarea>
+          </label>
+          <!-- Open Modal -->
+          <button class="start-btn" id="modal-btn">Save Invoice</button>
+
+          <!-- FORM -->
+        </div>
+        <!-- MODAL -->
+        <div id="myModal" class="modal">
+          <!-- MODAL CONTENT -->
+          <div class="modal-content">
+            <p>
+              Your form has been saved successfully. <br />
+              Thank You
+            </p>
+            <span class="close-btn">Close</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </body>
+</html>
