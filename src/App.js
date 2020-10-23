@@ -6,6 +6,7 @@ class App extends React.Component {
     super();
     this.state = {
       searchBox: "",
+      searchBoxValue: "",
       items: [],
     };
     this.getSearchResults = this.getSearchResults.bind(this);
@@ -18,79 +19,93 @@ class App extends React.Component {
 
     const res = await req.json();
     this.setState({ items: res.items, searchBox: "" });
-    console.log("items", this.state.searchBox);
+    // console.log("items", this.state.items);
   }
 
   render() {
     return (
       <div className="App">
-        <div class="search-container form">
+        <div className="search-container form">
           <input
             type="text"
             value={this.state.searchBox}
             id="search-bar"
-            placeholder="ISBN for Harry Porter 0747532699"
+            placeholder="e.g 0747532699"
             onChange={(e) => {
-              this.setState({ searchBox: e.target.value });
+              this.setState({
+                searchBox: e.target.value,
+                searchBoxValue: e.target.value,
+              });
             }}
           />
           <button onClick={this.getSearchResults}>Find Book</button>
         </div>
 
-        {this.state.items.map((item, index) => {
-          if (index === 0) {
-            return (
-              <div key={item.id} className="card">
-                <div className="wrapper">
-                  <div className="card-image">
-                    <img
-                      src={item.volumeInfo.imageLinks.thumbnail}
-                      alt="Book preview"
-                    />
+        {this.state.items === undefined ? (
+          <p>
+            No book found matching this isbn{" "}
+            <strong>{this.state.searchBoxValue}</strong>
+          </p>
+        ) : (
+          <div>
+            {this.state.items.map((item, index) => {
+              if (index === 0) {
+                return (
+                  <div key={item.id} className="card">
+                    <div className="wrapper">
+                      <div className="card-image">
+                        <img
+                          src={item.volumeInfo.imageLinks.thumbnail}
+                          alt="Book preview"
+                        />
+                      </div>
+                      <div className="card-info">
+                        <h2>{item.volumeInfo.title}</h2>
+                        <h5>
+                          {item.volumeInfo.subtitle
+                            ? item.volumeInfo.subtitle
+                            : ""}
+                        </h5>
+                        <p className="author">
+                          {item.volumeInfo.authors === undefined
+                            ? item.volumeInfo.publisher
+                            : item.volumeInfo.authors.map((author) => {
+                                return <span key={author}>{author} | </span>;
+                              })}
+                        </p>
+                        <span>{item.volumeInfo.publisher} | </span>
+                        <span
+                          className={
+                            item.volumeInfo.pageCount === "" ? "show" : "hide"
+                          }
+                        >
+                          {item.volumeInfo.publishedDate} |
+                        </span>
+                        <span>{item.volumeInfo.categories} | </span>
+                        <span
+                          className={
+                            item.volumeInfo.pageCount === "" ? "show" : "hide"
+                          }
+                        >
+                          {item.volumeInfo.pageCount}
+                          pages
+                        </span>
+                        <p className="desc">{item.volumeInfo.description}</p>
+                        <a
+                          href={item.volumeInfo.previewLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Get more info
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div className="card-info">
-                    <h2>{item.volumeInfo.title}</h2>
-                    <h5>
-                      {item.volumeInfo.subtitle ? item.volumeInfo.subtitle : ""}
-                    </h5>
-                    <p className="author">
-                      {item.volumeInfo.authors === undefined
-                        ? item.volumeInfo.publisher
-                        : item.volumeInfo.authors.map((author) => {
-                            return <span key={author}>{author} | </span>;
-                          })}
-                    </p>
-                    <span>{item.volumeInfo.publisher} | </span>
-                    <span
-                      className={
-                        item.volumeInfo.pageCount === "" ? "show" : "hide"
-                      }
-                    >
-                      {item.volumeInfo.publishedDate} |
-                    </span>
-                    <span>{item.volumeInfo.categories} | </span>
-                    <span
-                      className={
-                        item.volumeInfo.pageCount === "" ? "show" : "hide"
-                      }
-                    >
-                      {item.volumeInfo.pageCount}
-                      pages
-                    </span>
-                    <p className="desc">{item.volumeInfo.description}</p>
-                    <a
-                      href={item.volumeInfo.previewLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Get more info
-                    </a>
-                  </div>
-                </div>
-              </div>
-            );
-          }
-        })}
+                );
+              }
+            })}
+          </div>
+        )}
       </div>
     );
   }

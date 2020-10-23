@@ -20,7 +20,9 @@ body {
   grid-column-gap: 1.5rem;
   text-align: left;
 }
-
+p {
+  color: white;
+}
 /* FORM */
 .form {
   width: 80%;
@@ -65,11 +67,12 @@ button {
   background-color: #b13cff;
   border: none;
   color: white;
-  padding: .6rem 2rem;
-  font-size: .9rem;
+  padding: 0.6rem 2rem;
+  font-size: 0.9rem;
 }
-button:focus, button:active {
-  outline: none
+button:focus,
+button:active {
+  outline: none;
 }
 
 /* CARD */
@@ -109,15 +112,16 @@ span {
 
 /* Small devices (375px and down) */
 @media only screen and (max-width: 806px) {
-    .wrapper {
+  .wrapper {
     display: block;
   }
   .search-container {
-  display: block;
+    display: block;
   }
-  input#search-bar, button {
-  width: 80%;
-    margin: .5rem 0
+  input#search-bar,
+  button {
+    width: 80%;
+    margin: 0.5rem 0;
   }
 }
 
