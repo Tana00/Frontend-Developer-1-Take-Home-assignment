@@ -19,7 +19,7 @@ class App extends React.Component {
 
     const res = await req.json();
     this.setState({ items: res.items, searchBox: "" });
-    // console.log("items", this.state.items);
+    console.log("items", this.state.items);
   }
 
   render() {
@@ -55,7 +55,11 @@ class App extends React.Component {
                     <div className="wrapper">
                       <div className="card-image">
                         <img
-                          src={item.volumeInfo.imageLinks.thumbnail}
+                          src={
+                            item.volumeInfo.imageLinks === undefined
+                              ? "https://demo.hackerrahul.com/bookstore/images/default.jpg"
+                              : item.volumeInfo.imageLinks.thumbnail
+                          }
                           alt="Book preview"
                         />
                       </div>
