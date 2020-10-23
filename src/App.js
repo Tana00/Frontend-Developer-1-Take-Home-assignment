@@ -24,7 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <form class="search-container form">
+        <div class="search-container form">
           <input
             type="text"
             value={this.state.searchBox}
@@ -34,14 +34,8 @@ class App extends React.Component {
               this.setState({ searchBox: e.target.value });
             }}
           />
-          <a href="#">
-            <img
-              onClick={this.getSearchResults}
-              class="search-icon"
-              src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
-            />
-          </a>
-        </form>
+          <button onClick={this.getSearchResults}>Find Book</button>
+        </div>
 
         {this.state.items.map((item, index) => {
           if (index === 0) {
