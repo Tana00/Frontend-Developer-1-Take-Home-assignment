@@ -46,6 +46,7 @@ class App extends React.Component {
 
         {this.state.isLoading ? (
           <div class="divLoader">
+            <p>Loading...</p>
             <img src={Spinner} alt="loader icon" />
           </div>
         ) : (
