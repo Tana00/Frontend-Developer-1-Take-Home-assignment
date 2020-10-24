@@ -15,30 +15,6 @@ body {
   background: linear-gradient(0deg, #b13cff, #dd45d3 50%, #fd9d52);
 }
 
-<<<<<<< HEAD
-/* LOADER */
-.svgLoader {
-  animation: spin 0.5s linear infinite;
-  margin: auto;
-}
-.divLoader {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-=======
->>>>>>> df79b8d43b2c104995704d3d9974b9ef0ca3b79e
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 2fr;
