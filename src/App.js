@@ -8,17 +8,18 @@ class App extends React.Component {
       searchBox: "",
       searchBoxValue: "",
       items: [],
+      isLoading: true,
     };
     this.getSearchResults = this.getSearchResults.bind(this);
   }
 
   async getSearchResults(e) {
     const req = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.searchBox}`
+      `https://www.googleapis.combooks/v1/volumes?q=isbn:${this.state.searchBox}`
     );
 
     const res = await req.json();
-    this.setState({ items: res.items, searchBox: "" });
+    this.setState({ items: res.items, searchBox: "", isLoading: false });
     console.log("items", this.state.items);
   }
 
@@ -41,73 +42,87 @@ class App extends React.Component {
           <button onClick={this.getSearchResults}>Find Book</button>
         </div>
 
-        {this.state.items === undefined ? (
-          <p>
-            No book found matching this isbn{" "}
-            <strong>{this.state.searchBoxValue}</strong>
-          </p>
+        {this.state.isLoading ? (
+          <p>Loading...</p>
         ) : (
           <div>
-            {this.state.items.map((item, index) => {
-              if (index === 0) {
-                return (
-                  <div key={item.id} className="card">
-                    <div className="wrapper">
-                      <div className="card-image">
-                        <img
-                          src={
-                            item.volumeInfo.imageLinks === undefined
-                              ? "https://demo.hackerrahul.com/bookstore/images/default.jpg"
-                              : item.volumeInfo.imageLinks.thumbnail
-                          }
-                          alt="Book preview"
-                        />
+            {this.state.items === undefined ? (
+              <p>
+                No book found matching this isbn{" "}
+                <strong>{this.state.searchBoxValue}</strong>
+              </p>
+            ) : (
+              <div>
+                {this.state.items.map((item, index) => {
+                  if (index === 0) {
+                    return (
+                      <div key={item.id} className="card">
+                        <div className="wrapper">
+                          <div className="card-image">
+                            <img
+                              src={
+                                item.volumeInfo.imageLinks === undefined
+                                  ? "https://demo.hackerrahul.com/bookstore/images/default.jpg"
+                                  : item.volumeInfo.imageLinks.thumbnail
+                              }
+                              alt="Book preview"
+                            />
+                          </div>
+                          <div className="card-info">
+                            <h2>{item.volumeInfo.title}</h2>
+                            <h5>
+                              {item.volumeInfo.subtitle
+                                ? item.volumeInfo.subtitle
+                                : ""}
+                            </h5>
+                            <p className="author">
+                              {item.volumeInfo.authors === undefined
+                                ? item.volumeInfo.publisher
+                                : item.volumeInfo.authors.map((author) => {
+                                    return (
+                                      <span key={author}>{author} | </span>
+                                    );
+                                  })}
+                            </p>
+                            <span>{item.volumeInfo.publisher} | </span>
+                            <span
+                              className={
+                                item.volumeInfo.pageCount === ""
+                                  ? "show"
+                                  : "hide"
+                              }
+                            >
+                              {item.volumeInfo.publishedDate} |
+                            </span>
+                            <span>{item.volumeInfo.categories} | </span>
+                            <span
+                              className={
+                                item.volumeInfo.pageCount === ""
+                                  ? "show"
+                                  : "hide"
+                              }
+                            >
+                              {item.volumeInfo.pageCount}
+                              pages
+                            </span>
+                            <p className="desc">
+                              {item.volumeInfo.description}
+                            </p>
+                            <a
+                              href={item.volumeInfo.previewLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Get more info
+                            </a>
+                          </div>
+                        </div>
                       </div>
-                      <div className="card-info">
-                        <h2>{item.volumeInfo.title}</h2>
-                        <h5>
-                          {item.volumeInfo.subtitle
-                            ? item.volumeInfo.subtitle
-                            : ""}
-                        </h5>
-                        <p className="author">
-                          {item.volumeInfo.authors === undefined
-                            ? item.volumeInfo.publisher
-                            : item.volumeInfo.authors.map((author) => {
-                                return <span key={author}>{author} | </span>;
-                              })}
-                        </p>
-                        <span>{item.volumeInfo.publisher} | </span>
-                        <span
-                          className={
-                            item.volumeInfo.pageCount === "" ? "show" : "hide"
-                          }
-                        >
-                          {item.volumeInfo.publishedDate} |
-                        </span>
-                        <span>{item.volumeInfo.categories} | </span>
-                        <span
-                          className={
-                            item.volumeInfo.pageCount === "" ? "show" : "hide"
-                          }
-                        >
-                          {item.volumeInfo.pageCount}
-                          pages
-                        </span>
-                        <p className="desc">{item.volumeInfo.description}</p>
-                        <a
-                          href={item.volumeInfo.previewLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Get more info
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-            })}
+                    );
+                  }
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>
