@@ -17,7 +17,7 @@ class App extends React.Component {
   async getSearchResults(e) {
     this.setState({ isLoading: true });
     const req = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.searchBox}`
+      `https://www.googleapis.combooks/v1/volumes?q=isbn:${this.state.searchBox}`
     );
 
     const res = await req.json();
