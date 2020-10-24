@@ -14,6 +14,7 @@ body {
   filter: saturate(50%);
   background: linear-gradient(0deg, #b13cff, #dd45d3 50%, #fd9d52);
 }
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -111,7 +112,7 @@ span {
 /* MEDIA QUERIES */
 
 /* Small devices (375px and down) */
-@media only screen and (max-width: 806px) {
+@media only screen and (max-width: 823px) {
   .wrapper {
     display: block;
   }
