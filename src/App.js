@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "./Spinner.svg";
 import "./App.css";
 
 class App extends React.Component {
@@ -8,12 +9,13 @@ class App extends React.Component {
       searchBox: "",
       searchBoxValue: "",
       items: [],
-      isLoading: true,
+      isLoading: false
     };
     this.getSearchResults = this.getSearchResults.bind(this);
   }
 
   async getSearchResults(e) {
+    this.setState({ isLoading: true });
     const req = await fetch(
       `https://www.googleapis.combooks/v1/volumes?q=isbn:${this.state.searchBox}`
     );
@@ -32,10 +34,10 @@ class App extends React.Component {
             value={this.state.searchBox}
             id="search-bar"
             placeholder="e.g 0747532699"
-            onChange={(e) => {
+            onChange={e => {
               this.setState({
                 searchBox: e.target.value,
-                searchBoxValue: e.target.value,
+                searchBoxValue: e.target.value
               });
             }}
           />
@@ -43,7 +45,9 @@ class App extends React.Component {
         </div>
 
         {this.state.isLoading ? (
-          <p>Loading...</p>
+          <div class="divLoader">
+            <img src={Spinner} alt="loader icon" />
+          </div>
         ) : (
           <div>
             {this.state.items === undefined ? (
@@ -78,7 +82,7 @@ class App extends React.Component {
                             <p className="author">
                               {item.volumeInfo.authors === undefined
                                 ? item.volumeInfo.publisher
-                                : item.volumeInfo.authors.map((author) => {
+                                : item.volumeInfo.authors.map(author => {
                                     return (
                                       <span key={author}>{author} | </span>
                                     );
