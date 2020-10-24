@@ -9,7 +9,7 @@ class App extends React.Component {
       searchBox: "",
       searchBoxValue: "",
       items: [],
-      isLoading: false
+      isLoading: false,
     };
     this.getSearchResults = this.getSearchResults.bind(this);
   }
@@ -17,7 +17,7 @@ class App extends React.Component {
   async getSearchResults(e) {
     this.setState({ isLoading: true });
     const req = await fetch(
-      `https://www.googleapis.combooks/v1/volumes?q=isbn:${this.state.searchBox}`
+      `https://www.googleapis.com/books/v1/volumes?q=isbn:${this.state.searchBox}`
     );
 
     const res = await req.json();
@@ -34,18 +34,17 @@ class App extends React.Component {
             value={this.state.searchBox}
             id="search-bar"
             placeholder="e.g 0747532699"
-            onChange={e => {
+            onChange={(e) => {
               this.setState({
                 searchBox: e.target.value,
-                searchBoxValue: e.target.value
+                searchBoxValue: e.target.value,
               });
             }}
           />
           <button onClick={this.getSearchResults}>Find Book</button>
         </div>
-
         {this.state.isLoading ? (
-          <div class="divLoader">
+          <div className="divLoader">
             <img src={Spinner} alt="loader icon" />
           </div>
         ) : (
@@ -82,7 +81,7 @@ class App extends React.Component {
                             <p className="author">
                               {item.volumeInfo.authors === undefined
                                 ? item.volumeInfo.publisher
-                                : item.volumeInfo.authors.map(author => {
+                                : item.volumeInfo.authors.map((author) => {
                                     return (
                                       <span key={author}>{author} | </span>
                                     );
